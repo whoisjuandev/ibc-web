@@ -12,11 +12,12 @@ export const site = {
 	phone: { display: '03751 60-9688', href: 'tel:+543751609688' },
 	/** The church's school. The address works without `www`. */
 	institute: { name: 'Instituto Bautista del Centro', url: 'https://institutobautistadelcentro.com/' },
+	/** The children's event has its own Instagram account. */
+	fiesta: { name: 'Fiesta de la Luz', instagram: 'https://www.instagram.com/fiestadelaluz.ibc/' },
 	social: {
 		facebook: 'https://www.facebook.com/idelcentroeldorado',
 		instagram: 'https://www.instagram.com/ibc.eldorado/',
-		// TODO: replace with the channel URL once confirmed.
-		youtube: 'https://www.youtube.com/results?search_query=Iglesia+Bautista+del+Centro+Eldorado',
+		youtube: 'https://www.youtube.com/@ibc.eldorado',
 	},
 };
 

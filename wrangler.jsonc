@@ -1,0 +1,9 @@
+// Cloudflare Workers config: the site is fully static, so the Worker only serves the built files.
+// https://docs.astro.build/en/guides/deploy/cloudflare/
+{
+	"name": "ibc-web",
+	"compatibility_date": "2026-11-18",
+	"assets": {
+		"directory": "./dist",
+	},
+}

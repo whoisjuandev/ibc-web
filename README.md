@@ -23,6 +23,10 @@ npm run build     # static site in ./dist
 npm run preview   # serve the build locally
 ```
 
+## Deploy
+
+Cloudflare Workers serves the built files as static assets; `wrangler.jsonc` points it at `./dist`. The Worker is connected to this repository through Workers Builds, so every push to `main` runs `npm run build` and then `npx wrangler deploy`. The domain and its `www` are attached to the Worker as custom domains.
+
 ## Where things live
 
 - `src/data/site.ts`: schedule, venues, contact details and links. Edit content here; publish only confirmed facts.

@@ -17,7 +17,7 @@ const photos = [
 ];
 ---
 
-<section class="gallery section" aria-label="Fotos de nuestras reuniones">
+<section class="gallery section" aria-label="Fotos de nuestras reuniones" data-gallery>
 	<div class="track">
 		{
 			[0, 1].map((copy) => (
@@ -36,7 +36,34 @@ const photos = [
 			))
 		}
 	</div>
+
+	<!-- Revealed by the script: without it there is nothing to pause but hover. -->
+	<div class="wrap inset controls" data-gallery-controls hidden>
+		<button type="button" class="mono toggle" data-gallery-toggle>
+			<svg class="icon-pause" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
+				<path d="M3.5 0v11M6.5 0v11" stroke="currentColor"></path>
+			</svg>
+			<svg class="icon-play" width="10" height="11" viewBox="0 0 10 11" fill="none" aria-hidden="true">
+				<path d="M1.5.5l8 5-8 5z" stroke="currentColor" stroke-linejoin="round"></path>
+			</svg>
+			<span data-gallery-label>Pausar fotos</span>
+		</button>
+	</div>
 </section>
+
+<script>
+	// Hover alone cannot pause the drift on touch screens or from the keyboard.
+	const gallery = document.querySelector<HTMLElement>('[data-gallery]');
+	const controls = gallery?.querySelector<HTMLElement>('[data-gallery-controls]');
+	const label = gallery?.querySelector<HTMLElement>('[data-gallery-label]');
+	if (gallery && controls && label) {
+		controls.hidden = false;
+		controls.querySelector('button')!.addEventListener('click', () => {
+			const paused = gallery.toggleAttribute('data-paused');
+			label.textContent = paused ? 'Reanudar fotos' : 'Pausar fotos';
+		});
+	}
+</script>
 
 <style>
 	.gallery {
@@ -86,14 +113,51 @@ const photos = [
 			animation: drift 70s linear infinite;
 		}
 
-		.gallery:hover .track {
+		.gallery:hover .track,
+		.gallery[data-paused] .track {
 			animation-play-state: paused;
 		}
+	}
+
+	.toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		min-height: 2.75rem;
+		margin-top: 1.5rem;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: var(--ink);
+		cursor: pointer;
+		transition: color 0.3s var(--ease-out);
+	}
+
+	.toggle:hover {
+		color: var(--ink-soft);
+	}
+
+	.toggle svg {
+		flex: none;
+	}
+
+	.icon-play,
+	[data-paused] .icon-pause {
+		display: none;
+	}
+
+	[data-paused] .icon-play {
+		display: block;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.gallery {
 			overflow-x: auto;
+		}
+
+		/* Nothing drifts, so there is nothing to pause. */
+		.controls {
+			display: none;
 		}
 	}
 

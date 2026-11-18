@@ -1,43 +1,33 @@
-# Astro Starter Kit: Minimal
+# IBC Web
+
+Public website of Iglesia Bautista del Centro (IBC), a Baptist church in Eldorado, Misiones, Argentina. It tells a first-time visitor who the church is, when and where it meets, and what there is for each age.
+
+Built with [Astro](https://astro.build) as a static site, with GSAP for scroll motion.
+
+## Pages
+
+| Route | File | Purpose |
+| --- | --- | --- |
+| `/` | `src/pages/index.astro` | Home: visit cards, the week's gatherings, ministries, sermons, values, gallery |
+| `/visitanos/` | `src/pages/visitanos.astro` | Days, venues, directions and what a first visit is like |
+| `/ministerios/` | `src/pages/ministerios.astro` | Gatherings by age and the church's ministries |
+
+## Development
+
+Requires Node 22 or later.
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev       # local server at http://localhost:4321
+npm run build     # static site in ./dist
+npm run preview   # serve the build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Where things live
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `src/data/site.ts`: schedule, venues, contact details and links. Edit content here; publish only confirmed facts.
+- `src/components/`: one Astro component per section.
+- `src/assets/`: photos and the church's vector logos.
+- `src/scripts/motion.ts`: scroll motion, loaded once from the layout.
+- `PRODUCT.md`: who the site is for, what is confirmed and what is still missing.
+- `DESIGN.md`: the design system (colours, type, components, motion). Read it before changing the look.

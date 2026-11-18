@@ -1,0 +1,15 @@
+---
+import Arrow from './Arrow.astro';
+import TextPanel from './TextPanel.astro';
+import { gatherings, venues, days } from '../data/site';
+
+const prayer = gatherings.find((g) => g.id === 'oracion')!;
+const venue = venues[prayer.venue];
+---
+
+<TextPanel title={`Oramos juntos cada ${days[prayer.day].toLowerCase()}`}>
+	<p class="lead">Un tiempo para orar unos por otros, abierto a todos.</p>
+	<p class="mono">{prayer.time} h · {venue.name}</p>
+	<p class="quiet">{venue.address}, Eldorado</p>
+	<a class="go" href={venue.mapUrl} target="_blank" rel="noopener">Cómo llegar <Arrow /></a>
+</TextPanel>

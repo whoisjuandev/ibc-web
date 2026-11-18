@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+	id?: string;
+	photo: ImageMetadata;
+	alt: string;
+	/** URL of the logo that stands as the panel's heading. */
+	logo: string;
+	/** Read aloud in place of the logo. */
+	name: string;
+	/** Intrinsic size of the logo, for layout stability. */
+	logoSize: [number, number];
+	/** Rendered width of the logo, as a CSS length. */
+	logoWidth?: string;
+	/** Section photos are black and white; only Fiesta de la Luz keeps its colour. */
+	colour?: boolean;
+}
+
+const { id, photo, alt, logo, name, logoSize, logoWidth = '20rem', colour = false } = Astro.props;
+---
+
+<section class="feature wrap" id={id}>
+	<div class="panel">
+		<figure class="photo">
+			<Image
+				class:list={{ bw: !colour }}
+				src={photo}
+				alt={alt}
+				widths={[500, 800, 1200]}
+				sizes="(max-width: 56rem) 100vw, 40vw"
+			/>
+		</figure>
+
+		<div class="text">
+			<h2>
+				<img src={logo} alt={name} width={logoSize[0]} height={logoSize[1]} style={`width: min(100%, ${logoWidth})`} />
+			</h2>
+			<slot />
+		</div>
+	</div>
+</section>
+
+<style>
+	.feature {
+		padding-inline: var(--inset);
+	}
+
+	.panel {
+		display: grid;
+		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+		background: var(--ink);
+		color: var(--on-dark);
+	}
+
+	.photo {
+		min-height: clamp(18rem, 36vw, 30rem);
+		overflow: hidden;
+	}
+
+	.photo :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.text {
+		display: grid;
+		gap: 1.25rem;
+		align-content: center;
+		justify-items: start;
+		padding: clamp(2rem, 5vw, 4.5rem) clamp(1.5rem, 4.5vw, 4rem);
+	}
+
+	h2 {
+		margin-bottom: 0.5rem;
+	}
+
+	h2 img {
+		height: auto;
+	}
+
+	.text :global(.lead) {
+		font-size: var(--text-l);
+		line-height: 1.4;
+	}
+
+	.text :global(.quiet) {
+		color: var(--on-dark-soft);
+	}
+
+	@media (max-width: 56rem) {
+		.panel {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

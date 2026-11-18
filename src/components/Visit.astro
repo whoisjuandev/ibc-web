@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import reunion from '../assets/photos/reunion.jpg';
+import predica from '../assets/photos/predica.jpg';
+import { site, venues, gatherings, days } from '../data/site';
+
+interface Props {
+	id?: string;
+	heading?: string;
+	sub?: string;
+	/** The home links on to the visit page; the visit page itself needs no action. */
+	action?: { label: string; href: string } | null;
+}
+
+const {
+	id = 'visita',
+	heading = 'Visitá IBC',
+	sub = 'Te esperamos cada semana en dos lugares de Eldorado',
+	action = { label: 'Planificá tu visita', href: '/visitanos/' },
+} = Astro.props;
+
+const at = (id: 'auditorio' | 'templo') =>
+	gatherings.filter((g) => g.venue === id).map((g) => `${days[g.day]} ${g.time} · ${g.name}`);
+
+const places = [
+	{
+		name: venues.auditorio.name,
+		lines: at('auditorio'),
+		address: `${venues.auditorio.address}, ${site.city}`,
+		href: venues.auditorio.mapUrl,
+		action: 'Cómo llegar',
+		photo: reunion,
+		alt: 'La banda tocando en el escenario del Auditorio Bautista, con la congregación de pie',
+		poster: null,
+	},
+	{
+		name: venues.templo.name,
+		lines: gatherings.filter((g) => g.venue === 'templo').map((g) => g.name),
+		address: `${venues.templo.address}, ${site.city}`,
+		href: venues.templo.mapUrl,
+		action: 'Cómo llegar',
+		photo: null,
+		alt: '',
+		poster: { day: 'Miércoles', time: '20:15' },
+	},
+	{
+		name: 'Desde tu casa',
+		lines: ['Las prédicas quedan en nuestro canal'],
+		address: 'YouTube',
+		href: site.social.youtube,
+		action: 'Ver prédicas',
+		photo: predica,
+		alt: 'Un pastor predicando con el micrófono en la mano',
+		poster: null,
+		tight: true,
+	},
+];
+---
+
+<section class="visit section" id={id}>
+	<div class="wrap head">
+		<h2 class="title">{heading}</h2>
+		<p class="sub">{sub}</p>
+		{action && <a class="pill" href={action.href}>{action.label}</a>}
+	</div>
+
+	<ol class="row" data-row>
+		{
+			places.map((p, i) => (
+				<li class="card place">
+					<p class="num">{String(i + 1).padStart(2, '0')}</p>
+					<a class="frame" href={p.href} target="_blank" rel="noopener" tabindex="-1">
+						{p.photo ? (
+							<Image
+								class:list={['bw', { tight: 'tight' in p }]}
+								src={p.photo}
+								alt={p.alt}
+								widths={[400, 700]}
+								sizes="(max-width: 40rem) 78vw, 22rem"
+							/>
+						) : (
+							<span class="poster">
+								<span class="mono">{p.poster?.day}</span>
+								<span class="poster-time">{p.poster?.time}</span>
+							</span>
+						)}
+						<span class="tag mono">{p.action}</span>
+					</a>
+					<h3 class="title-s">{p.name}</h3>
+					<ul class="lines">
+						{p.lines.map((l) => <li>{l}</li>)}
+					</ul>
+					<a class="mono-text address" href={p.href} target="_blank" rel="noopener">
+						{p.address}
+					</a>
+				</li>
+			))
+		}
+	</ol>
+</section>
+
+<style>
+	.head {
+		display: grid;
+		justify-items: center;
+		gap: 1rem;
+		text-align: center;
+	}
+
+	.sub {
+		font-size: var(--text-l);
+	}
+
+	.pill {
+		margin-top: 0.75rem;
+	}
+
+	.row {
+		justify-content: safe center;
+		margin-top: clamp(2.5rem, 5vw, 4rem);
+	}
+
+	.place {
+		display: grid;
+		align-content: start;
+		width: min(78vw, 22rem);
+		padding: 1.75rem;
+	}
+
+	.num {
+		font-family: var(--font-title);
+		font-size: var(--title-s);
+		font-weight: 500;
+	}
+
+	.frame {
+		position: relative;
+		display: block;
+		margin-block: 1.5rem;
+		aspect-ratio: 3 / 2;
+		text-decoration: none;
+		overflow: hidden;
+		background: var(--ground);
+	}
+
+	.frame :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 30%;
+		transition: scale 0.8s var(--ease-out);
+	}
+
+	.place:hover .frame :global(img) {
+		scale: 1.04;
+	}
+
+	.frame :global(img.tight) {
+		scale: 1.7;
+		transform-origin: 62% 18%;
+	}
+
+	.place:hover .frame :global(img.tight) {
+		scale: 1.76;
+	}
+
+	.poster {
+		display: grid;
+		align-content: space-between;
+		height: 100%;
+		padding: 0.9rem 1rem 3.5rem;
+		background: var(--ground-deep);
+	}
+
+	.poster-time {
+		font-family: var(--font-title);
+		font-size: 3.5rem;
+		font-weight: 500;
+		line-height: 0.9;
+		letter-spacing: -0.03em;
+	}
+
+	.tag {
+		position: absolute;
+		left: 0.75rem;
+		bottom: 0.75rem;
+		padding: 0.3rem 0.8rem;
+		border-radius: 999px;
+		background: var(--paper);
+		font-size: 0.75rem;
+	}
+
+	.lines {
+		margin-top: 0.4rem;
+		font-size: var(--text-s);
+		line-height: 1.5;
+	}
+
+	.address {
+		display: block;
+		margin-top: 1.25rem;
+		text-decoration: none;
+	}
+
+	.address:hover {
+		color: var(--ink);
+		text-decoration: underline;
+	}
+</style>

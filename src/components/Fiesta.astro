@@ -1,0 +1,29 @@
+---
+import FeaturePanel from './FeaturePanel.astro';
+import Arrow from './Arrow.astro';
+import escenario from '../assets/photos/fiesta-escenario.jpg';
+import logo from '../assets/logos/fiesta-de-la-luz.svg?url';
+import { site } from '../data/site';
+---
+
+<FeaturePanel
+	id="fiesta"
+	photo={escenario}
+	alt="Chicos bailando en el escenario de Octubrillante, entre luces y humo de colores"
+	logo={logo}
+	name="Fiesta de la Luz"
+	logoSize={[320, 154]}
+	colour
+>
+	<p class="lead">
+		Cada octubre, Octubrillante llena una tarde entera de juegos, música y alegría para los chicos y
+		sus familias.
+	</p>
+	<p class="quiet">
+		En 2025 la fiesta cumplió diez años. En 2024 nos acompañaron más de 6.000 personas, y cada edición
+		es posible gracias a los voluntarios que sirven.
+	</p>
+	<a class="go" href={site.social.instagram} target="_blank" rel="noopener">
+		Mirá cómo se vivió <Arrow />
+	</a>
+</FeaturePanel>

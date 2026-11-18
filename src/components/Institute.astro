@@ -1,0 +1,21 @@
+---
+import FeaturePanel from './FeaturePanel.astro';
+import Arrow from './Arrow.astro';
+import portada from '../assets/photos/instituto-portada.webp';
+import logo from '../assets/logos/instituto-white.svg?url';
+import { site } from '../data/site';
+---
+
+<FeaturePanel
+	id="instituto"
+	photo={portada}
+	alt="Alumnos del Instituto Bautista del Centro con el uniforme del colegio, levantando la mano"
+	logo={logo}
+	name={site.institute.name}
+	logoSize={[160, 160]}
+	logoWidth="9rem"
+>
+	<p class="lead">Nuestro colegio en Eldorado, con nivel inicial, primario y secundario.</p>
+	<p class="quiet">Educación con formación cristiana.</p>
+	<a class="go" href={site.institute.url} target="_blank" rel="noopener">Conocé el instituto <Arrow /></a>
+</FeaturePanel>

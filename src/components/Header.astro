@@ -1,0 +1,185 @@
+---
+import logo from '../assets/logos/ibc-horizontal-black.svg?url';
+
+const links = [
+	{ href: '/visitanos/', label: 'Visitanos' },
+	{ href: '/#semana', label: 'Reuniones' },
+	{ href: '/ministerios/', label: 'Ministerios' },
+	{ href: '/#predicas', label: 'Prédicas' },
+	{ href: '/#fiesta', label: 'Fiesta de la Luz' },
+];
+
+const here = Astro.url.pathname.replace(/\/?$/, '/');
+const current = (href: string) => (href === here ? 'page' : undefined);
+---
+
+<header class="site-header" data-header>
+	<div class="wrap bar">
+		<a class="mark" href="/" aria-label="Iglesia Bautista del Centro, inicio">
+			<img src={logo} alt="" width="139" height="40" />
+		</a>
+
+		<nav class="nav" aria-label="Principal">
+			<ul>
+				{links.map((l) => <li><a href={l.href} aria-current={current(l.href)}>{l.label}</a></li>)}
+			</ul>
+		</nav>
+
+		<a class="pill cta" href="/visitanos/#como-llegar">Cómo llegar</a>
+
+		<details class="menu">
+			<summary aria-label="Menú">
+				<span></span><span></span>
+			</summary>
+			<nav aria-label="Principal, móvil">
+				<ul>
+					{links.map((l) => <li><a href={l.href} aria-current={current(l.href)}>{l.label}</a></li>)}
+				</ul>
+			</nav>
+		</details>
+	</div>
+</header>
+
+<script>
+	const menu = document.querySelector<HTMLDetailsElement>('[data-header] details');
+	menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => menu.removeAttribute('open')));
+</script>
+
+<style>
+	.site-header {
+		position: fixed;
+		inset: 0 0 auto;
+		z-index: 50;
+		background: var(--paper);
+	}
+
+	.bar {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		height: var(--header);
+	}
+
+	.mark {
+		justify-self: start;
+		display: block;
+		padding-block: 0.4rem;
+	}
+
+	.mark img {
+		width: auto;
+		height: 2.5rem;
+	}
+
+	.nav ul {
+		display: flex;
+		gap: clamp(1.25rem, 2.6vw, 2.5rem);
+	}
+
+	.nav a {
+		padding-block: 0.6rem;
+		font-size: var(--text-s);
+		font-weight: 500;
+		text-decoration: none;
+		transition: opacity 0.3s var(--ease-out);
+	}
+
+	.nav ul:hover a:not(:hover) {
+		opacity: 0.45;
+	}
+
+	a[aria-current='page'] {
+		color: var(--blue);
+	}
+
+	.cta {
+		grid-column: 3;
+		justify-self: end;
+		min-height: 2.5rem;
+		padding-inline: 1.25rem;
+	}
+
+	.menu {
+		grid-column: 3;
+		justify-self: end;
+	}
+
+	.menu summary {
+		display: grid;
+		place-content: center;
+		gap: 6px;
+		width: 2.75rem;
+		height: 2.75rem;
+		margin-right: -0.4rem;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.menu summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.menu summary span {
+		height: 2px;
+		background: var(--ink);
+		transition:
+			translate 0.3s var(--ease-out),
+			rotate 0.3s var(--ease-out),
+			width 0.3s var(--ease-out);
+	}
+
+	.menu summary span:first-child {
+		width: 1.75rem;
+	}
+
+	.menu summary span:last-child {
+		width: 1.25rem;
+		justify-self: end;
+	}
+
+	.menu[open] summary span:first-child {
+		translate: 0 4px;
+		rotate: 45deg;
+	}
+
+	.menu[open] summary span:last-child {
+		width: 1.75rem;
+		translate: 0 -4px;
+		rotate: -45deg;
+	}
+
+	.menu nav {
+		position: absolute;
+		inset: 100% 0 auto;
+		padding: 0.5rem var(--gutter) 2rem;
+		background: var(--paper);
+		border-top: 1px solid var(--line);
+	}
+
+	.menu li + li {
+		border-top: 1px solid var(--line);
+	}
+
+	.menu a {
+		display: block;
+		padding-block: 1rem;
+		font-family: var(--font-title);
+		font-size: 1.75rem;
+		font-weight: 500;
+		letter-spacing: -0.012em;
+		text-decoration: none;
+	}
+
+	@media (min-width: 56rem) {
+		.menu {
+			display: none;
+		}
+	}
+
+	@media (max-width: 55.99rem) {
+		.nav,
+		.cta {
+			display: none;
+		}
+	}
+</style>

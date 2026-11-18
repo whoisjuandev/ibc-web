@@ -1,0 +1,82 @@
+---
+import { gatherings, venues } from '../data/site';
+
+const main = gatherings[0];
+const venue = venues[main.venue];
+
+const steps = [
+	{
+		name: 'Vení el domingo',
+		text: `La ${main.name} empieza a las ${main.time} en el ${venue.name}, ${venue.address}.`,
+	},
+	{
+		name: 'Qué vas a encontrar',
+		text: 'Un tiempo de alabanza y adoración, oración y enseñanza de la Biblia.',
+	},
+	{
+		name: 'Hay lugar para todos',
+		text: 'Los chicos de hasta 9 años tienen su encuentro a la misma hora. En la semana se reúnen pre-adolescentes, adolescentes y jóvenes.',
+	},
+];
+---
+
+<section class="first section">
+	<div class="wrap inset grid">
+		<div class="intro">
+			<h2 class="title">Tu primera vez</h2>
+			<p class="soft">
+				Es nuestro deseo que vuelvas a venir, pero que también te sientas parte de esta familia.
+			</p>
+		</div>
+
+		<ol class="list">
+			{
+				steps.map((s, i) => (
+					<li>
+						<p class="num">{String(i + 1).padStart(2, '0')}</p>
+						<h3 class="title-s">{s.name}</h3>
+						<p class="mono-text">{s.text}</p>
+					</li>
+				))
+			}
+		</ol>
+	</div>
+</section>
+
+<style>
+	.grid {
+		display: grid;
+		grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+		gap: clamp(2rem, 5vw, 5rem);
+	}
+
+	.intro {
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+	}
+
+	.list {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.num {
+		font-family: var(--font-title);
+		font-size: var(--title-s);
+		font-weight: 500;
+		line-height: 1.15;
+	}
+
+	.mono-text {
+		margin-top: 0.9rem;
+	}
+
+	@media (max-width: 56rem) {
+		.grid,
+		.list {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

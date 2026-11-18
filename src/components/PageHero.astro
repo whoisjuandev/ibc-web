@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+	title: string;
+	photo: ImageMetadata;
+	alt: string;
+	/** CSS object-position for the cover crop. */
+	focus?: string;
+}
+
+const { title, photo, alt, focus = '50% 40%' } = Astro.props;
+---
+
+<section class="page-hero hero">
+	<Image
+		class="photo"
+		src={photo}
+		alt={alt}
+		widths={[640, 960, 1440, 2048]}
+		sizes="(max-aspect-ratio: 1/1) 150vh, 100vw"
+		loading="eager"
+		fetchpriority="high"
+		style={`object-position: ${focus}`}
+	/>
+	<div class="wrap foot">
+		<h1 class="title-l">{title}</h1>
+	</div>
+</section>
+
+<style>
+	.page-hero {
+		position: relative;
+		display: grid;
+		align-items: end;
+		min-height: max(72svh, 26rem);
+		padding-top: var(--header);
+		color: var(--on-dark);
+		isolation: isolate;
+		overflow: hidden;
+	}
+
+	.photo {
+		position: absolute;
+		inset: var(--header) 0 0;
+		z-index: -2;
+		width: 100%;
+		height: calc(100% - var(--header));
+		object-fit: cover;
+	}
+
+	.page-hero::after {
+		content: '';
+		position: absolute;
+		inset: var(--header) 0 0;
+		z-index: -1;
+		background: linear-gradient(to top, rgb(19 18 18 / 0.72), rgb(19 18 18 / 0.1) 60%);
+	}
+
+	.foot {
+		padding-block: 3rem clamp(1.75rem, 5vh, 3.5rem);
+	}
+
+	h1 {
+		max-width: 16ch;
+		padding-left: var(--inset);
+	}
+
+	@media (max-width: 56rem) {
+		h1 {
+			padding-left: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.photo {
+			animation: settle 2.2s var(--ease-out) both;
+		}
+
+		h1 {
+			animation: fade-up 1s var(--ease-out) 0.2s both;
+		}
+	}
+
+	@keyframes settle {
+		from {
+			scale: 1.06;
+		}
+	}
+
+	@keyframes fade-up {
+		from {
+			opacity: 0;
+			translate: 0 1rem;
+		}
+	}
+</style>

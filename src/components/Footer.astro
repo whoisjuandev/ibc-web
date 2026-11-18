@@ -1,0 +1,94 @@
+---
+import { site } from '../data/site';
+import logo from '../assets/logos/ibc-stacked-black.svg?url';
+
+const year = new Date().getFullYear();
+const links = [
+	{ href: '/visitanos/', label: 'Visitanos' },
+	{ href: '/#semana', label: 'Reuniones' },
+	{ href: '/ministerios/', label: 'Ministerios' },
+	{ href: site.social.youtube, label: 'Prédicas' },
+	{ href: '/#fiesta', label: 'Fiesta de la Luz' },
+	{ href: site.institute.url, label: 'Instituto Bautista' },
+];
+---
+
+<footer class="footer">
+	<div class="wrap inset">
+		<nav aria-label="Pie de página">
+			<ul class="links">
+				{
+					links.map((l) => (
+						<li>
+							<a href={l.href} target={l.href.startsWith('http') ? '_blank' : undefined} rel={l.href.startsWith('http') ? 'noopener' : undefined}>
+								{l.label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+
+		<ul class="pills">
+			<li><a class="pill" href={site.phone.href}>Llamanos</a></li>
+			<li><a class="pill" href={site.social.instagram} target="_blank" rel="noopener">Instagram</a></li>
+			<li><a class="pill" href={site.social.facebook} target="_blank" rel="noopener">Facebook</a></li>
+		</ul>
+
+		<div class="base">
+			<img class="mark" src={logo} alt="Iglesia Bautista del Centro" width="126" height="112" />
+			<p class="mono-text">
+				{site.name} · {site.city}, {site.country} · {site.phone.display}
+			</p>
+			<p class="mono-text">{site.hashtag} · © {year}</p>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		padding-block: clamp(3rem, 5vw, 4.5rem) 2rem;
+		background: var(--paper);
+	}
+
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem clamp(1.25rem, 2.6vw, 2.5rem);
+	}
+
+	.links a {
+		display: inline-block;
+		padding-block: 0.5rem;
+		font-size: var(--text-s);
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.links a:hover {
+		text-decoration: underline;
+	}
+
+	.pills {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.5rem;
+	}
+
+	.base {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: end;
+		gap: 0.5rem 2rem;
+		margin-top: clamp(3rem, 6vw, 5rem);
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--line);
+	}
+
+	.mark {
+		width: auto;
+		height: 7rem;
+		margin-right: auto;
+	}
+</style>

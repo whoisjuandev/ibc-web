@@ -1,0 +1,282 @@
+---
+import { gatherings, venues, days } from '../data/site';
+
+interface Props {
+	id?: string;
+	heading?: string;
+	sub?: string;
+	/** Show only these gatherings, by id. Defaults to the whole week. */
+	only?: string[];
+}
+
+const { id = 'semana', heading = 'La semana en IBC', sub, only } = Astro.props;
+// The whole week shows one card per time slot: a gathering that runs alongside another
+// is named inside that card instead of repeating the same day and time.
+const items = only
+	? only.flatMap((key) => gatherings.filter((g) => g.id === key))
+	: gatherings.filter((g) => !g.alongside);
+const companions = (id: string) => (only ? [] : gatherings.filter((g) => g.alongside === id));
+---
+
+<section class="week section" id={id}>
+	<div class="wrap inset">
+		<h2 class="title title--quiet">{heading}</h2>
+		{sub && <p class="sub">{sub}</p>}
+	</div>
+
+	<ol class="row" data-row style={`--n: ${items.length}`}>
+		{
+			items.map((g) => {
+				const venue = venues[g.venue];
+				return (
+					<li
+						class="card g"
+						data-gathering
+						data-day={g.day}
+						data-time={g.time}
+						data-name={g.name}
+						data-where={`${venue.name}, ${venue.address}`}
+						data-map={venue.mapUrl}
+					>
+						<div class="poster">
+							<div class="top">
+								<p class="mono day">{days[g.day]}</p>
+								<p class="mono flag" data-flag hidden />
+							</div>
+							<p class="time">{g.time}</p>
+						</div>
+						<h3 class="title-s">{g.name}</h3>
+						<p class="mono-text">{g.who}</p>
+						{companions(g.id).map((c) => (
+							<p class="also">
+								A la misma hora: {c.name} ({c.who.toLowerCase()})
+							</p>
+						))}
+						<p class="where soft">
+							{venue.name}
+							<br />
+							{venue.address}
+						</p>
+						<a class="pill" href={venue.mapUrl} target="_blank" rel="noopener">
+							Cómo llegar
+						</a>
+					</li>
+				);
+			})
+		}
+	</ol>
+
+	<div class="wrap inset">
+		<div class="row-nav" data-row-nav>
+			<button type="button" data-dir="-1" aria-label="Anterior">
+				<svg width="22" height="9" viewBox="0 0 22 9" fill="none" aria-hidden="true">
+					<path d="M22 4.5H1M5 .5l-4 4 4 4" stroke="currentColor"></path>
+				</svg>
+			</button>
+			<button type="button" data-dir="1" aria-label="Siguiente">
+				<svg width="22" height="9" viewBox="0 0 22 9" fill="none" aria-hidden="true">
+					<path d="M0 4.5h21M17 .5l4 4-4 4" stroke="currentColor"></path>
+				</svg>
+			</button>
+		</div>
+	</div>
+</section>
+
+<script>
+	// Marks the next gathering, in Argentina time, and mirrors it in the hero card.
+	const TZ = 'America/Argentina/Buenos_Aires';
+	const DAY_KEYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	const DAY_NAMES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+	const WEEK = 7 * 24 * 60;
+	const LENGTH = 90;
+
+	const parts = Object.fromEntries(
+		new Intl.DateTimeFormat('en-US', {
+			timeZone: TZ,
+			weekday: 'short',
+			hour: '2-digit',
+			minute: '2-digit',
+			hourCycle: 'h23',
+		})
+			.formatToParts(new Date())
+			.map((p) => [p.type, p.value]),
+	);
+	const today = DAY_KEYS.indexOf(parts.weekday);
+	const now = today * 1440 + Number(parts.hour) * 60 + Number(parts.minute);
+
+	const items = [...document.querySelectorAll<HTMLElement>('[data-gathering]')].map((el) => {
+		const [h, m] = el.dataset.time!.split(':').map(Number);
+		const day = Number(el.dataset.day);
+		const start = day * 1440 + h * 60 + m;
+		const live = (now - start + WEEK) % WEEK < LENGTH;
+		const until = (start - now + WEEK) % WEEK;
+		return { el, day, live, until };
+	});
+
+	const next = items.reduce((a, b) => ((b.live ? -1 : b.until) < (a.live ? -1 : a.until) ? b : a));
+	const label = next.live ? 'Ahora' : 'Lo próximo';
+
+	const flag = next.el.querySelector<HTMLElement>('[data-flag]');
+	next.el.classList.add('is-next');
+	if (flag) {
+		flag.textContent = label;
+		flag.hidden = false;
+	}
+
+	const diff = (next.day - today + 7) % 7;
+	const when = next.live
+		? 'Ahora'
+		: diff === 0 && next.until < 1440
+			? 'Hoy'
+			: diff === 1
+				? 'Mañana'
+				: diff === 0
+					? `El próximo ${DAY_NAMES[next.day]}`
+					: `Este ${DAY_NAMES[next.day]}`;
+
+	const card = document.querySelector<HTMLAnchorElement>('[data-next]');
+	if (card) {
+		const set = (key: string, text: string) => {
+			const el = card.querySelector(`[data-next-${key}]`);
+			if (el) el.textContent = text;
+		};
+		const { name, time, where, map } = next.el.dataset;
+		set('flag', label);
+		set('name', name!);
+		set('when', next.live ? `Empezó a las ${time} h` : `${when}, ${time} h`);
+		set('where', where!);
+		card.href = map!;
+	}
+
+	// Row arrows, shared by every horizontal row that has a nav after it.
+	document.querySelectorAll<HTMLElement>('[data-row-nav]').forEach((nav) => {
+		const row = nav.closest('section')?.querySelector<HTMLElement>('[data-row]');
+		if (!row) return;
+		const buttons = [...nav.querySelectorAll<HTMLButtonElement>('button')];
+		const step = () => (row.firstElementChild as HTMLElement).offsetWidth + 24;
+		const sync = () => {
+			buttons[0].disabled = row.scrollLeft < 8;
+			buttons[1].disabled = row.scrollLeft > row.scrollWidth - row.clientWidth - 8;
+		};
+		buttons.forEach((b) =>
+			b.addEventListener('click', () => row.scrollBy({ left: Number(b.dataset.dir) * step(), behavior: 'smooth' })),
+		);
+		row.addEventListener('scroll', sync, { passive: true });
+		window.addEventListener('resize', sync);
+		sync();
+	});
+</script>
+
+<style>
+	.sub {
+		max-width: 44ch;
+		margin-top: 0.75rem;
+		font-size: var(--text-l);
+		line-height: 1.4;
+	}
+
+	.row {
+		margin-top: clamp(1.75rem, 3vw, 2.5rem);
+		padding-inline: max(var(--gutter) + var(--inset), (100% - var(--max)) / 2 + var(--inset));
+		scroll-padding-inline: max(var(--gutter) + var(--inset), (100% - var(--max)) / 2 + var(--inset));
+	}
+
+	.g {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		width: min(76vw, 19.5rem);
+		padding-bottom: 1.75rem;
+	}
+
+	.g > :not(.poster) {
+		margin-inline: 1.5rem;
+	}
+
+	.poster {
+		display: grid;
+		align-content: space-between;
+		align-self: stretch;
+		aspect-ratio: 1;
+		margin-bottom: 1.5rem;
+		padding: 1.5rem;
+		background: var(--ground-deep);
+		container-type: inline-size;
+	}
+
+	.top {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.4rem 0.75rem;
+	}
+
+	.is-next .poster {
+		background: var(--ink);
+		color: var(--on-dark);
+	}
+
+	.time {
+		font-family: var(--font-title);
+		font-size: clamp(3rem, 32cqi, 5.5rem);
+		font-weight: 500;
+		line-height: 0.9;
+		letter-spacing: -0.03em;
+	}
+
+	.flag {
+		padding: 0.15rem 0.7rem;
+		border: 1px solid currentColor;
+		border-radius: 999px;
+		font-size: 0.75rem;
+	}
+
+	.flag[hidden] {
+		display: none;
+	}
+
+	.also {
+		margin-top: 0.6rem;
+		font-size: var(--text-s);
+		line-height: 1.4;
+	}
+
+	.where {
+		margin-block: 1rem 1.5rem;
+		font-size: var(--text-s);
+		line-height: 1.45;
+	}
+
+	.g .pill {
+		margin-top: auto;
+	}
+
+	/* Wide screens: the week fits the content column, one card per column, nothing to scroll. */
+	@media (min-width: 75rem) {
+		.row {
+			display: grid;
+			grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+			width: min(100% - 2 * var(--gutter), var(--max));
+			margin-inline: auto;
+			padding-inline: var(--inset);
+			overflow: visible;
+		}
+
+		.g {
+			width: auto;
+		}
+
+		.g > :not(.poster) {
+			margin-inline: 1.25rem;
+		}
+
+		.poster {
+			padding: 1.25rem;
+		}
+
+		.row-nav {
+			display: none;
+		}
+	}
+</style>

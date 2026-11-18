@@ -1,0 +1,51 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Week from '../components/Week.astro';
+import TextPanel from '../components/TextPanel.astro';
+import ForYou from '../components/ForYou.astro';
+import Contact from '../components/Contact.astro';
+import Arrow from '../components/Arrow.astro';
+import familia from '../assets/photos/familia.jpg';
+import reunion from '../assets/photos/reunion.jpg';
+import { site, ministries, generations } from '../data/site';
+
+const others = ministries.filter((m) => !m.generation && m.name !== 'Grupos de vida');
+---
+
+<Base
+	title="Ministerios · Iglesia Bautista del Centro"
+	description="Encuentros para cada edad en la Iglesia Bautista del Centro: niños, pre-adolescentes, adolescentes y jóvenes, además de grupos de vida, mujeres, parejas, alabanza y oración."
+>
+	<PageHero
+		title="Un lugar para cada etapa"
+		photo={familia}
+		alt="Una pareja joven con su bebé en brazos, sonriendo junto a los pastores en el escenario"
+		focus="50% 20%"
+	/>
+	<Week
+		id="encuentros"
+		heading="Encuentros 4G"
+		sub="Un encuentro semanal para cada edad, en el Auditorio Bautista."
+		only={generations}
+	/>
+	<TextPanel title="Grupos de vida" id="grupos">
+		<p class="lead">
+			Grupos chicos que se juntan durante la semana en distintos puntos de Eldorado, para compartir la
+			vida y la Palabra.
+		</p>
+		<p class="quiet">Hay grupos de mujeres, de hombres, de adolescentes, de jóvenes y mixtos.</p>
+		<a class="go" href={site.social.instagram} target="_blank" rel="noopener">
+			Preguntanos cuál te queda cerca <Arrow />
+		</a>
+	</TextPanel>
+	<ForYou
+		id="mas"
+		heading="Y también"
+		items={others}
+		photo={reunion}
+		alt="La banda tocando en el escenario del Auditorio Bautista, con la congregación de pie"
+		focus="50% 40%"
+	/>
+	<Contact />
+</Base>

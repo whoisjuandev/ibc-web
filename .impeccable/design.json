@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T12:00:00-03:00",
+  "title": "Design System: Iglesia Bautista del Centro",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Warm Gray Ground",
+        "canonical": "#e8e6e3",
+        "tonalRamp": ["#2b2a28", "#4a4845", "#6b6966", "#8d8a86", "#aeaba7", "#cbc8c4", "#e8e6e3", "#f4f3f1"]
+      },
+      "ground-deep": {
+        "role": "neutral",
+        "displayName": "Deep Ground",
+        "canonical": "#dcd9d4",
+        "tonalRamp": ["#292725", "#474541", "#67645f", "#88847e", "#a8a49e", "#c3bfb9", "#dcd9d4", "#efedea"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "canonical": "#ffffff",
+        "tonalRamp": ["#262626", "#474747", "#6b6b6b", "#8f8f8f", "#b3b3b3", "#d4d4d4", "#f0f0f0", "#ffffff"]
+      },
+      "ink": {
+        "role": "primary",
+        "displayName": "Near-Black Ink",
+        "canonical": "#131212",
+        "tonalRamp": ["#131212", "#2c2a2a", "#474545", "#636060", "#827f7e", "#a4a1a0", "#c9c6c5", "#eeeceb"]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Soft Ink",
+        "canonical": "#5a5855",
+        "tonalRamp": ["#242321", "#3e3c3a", "#5a5855", "#777571", "#95928e", "#b3b0ac", "#d1cfcb", "#eeedea"]
+      },
+      "ink-faint": {
+        "role": "neutral",
+        "displayName": "Faint Ink",
+        "canonical": "#757370",
+        "tonalRamp": ["#262523", "#403e3c", "#5b5956", "#757370", "#93918d", "#b2afab", "#d0cecb", "#eeedea"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgb(19 18 18 / 0.18)",
+        "tonalRamp": ["#131212", "#3f3d3c", "#666463", "#8b8988", "#aaa8a6", "#c2c0bd", "#d6d4d1", "#e8e6e3"]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "On Dark",
+        "canonical": "#e8e6e3",
+        "tonalRamp": ["#2b2a28", "#4a4845", "#6b6966", "#8d8a86", "#aeaba7", "#cbc8c4", "#e8e6e3", "#f4f3f1"]
+      },
+      "on-dark-soft": {
+        "role": "neutral",
+        "displayName": "On Dark Soft",
+        "canonical": "#a9a6a1",
+        "tonalRamp": ["#272624", "#43413e", "#605d5a", "#7e7b77", "#a9a6a1", "#c0bdb9", "#d8d6d2", "#efeeeb"]
+      },
+      "blue": {
+        "role": "secondary",
+        "displayName": "Church Blue (focus ring only)",
+        "canonical": "#1b4f8c",
+        "tonalRamp": ["#0b2140", "#123563", "#1b4f8c", "#3b6fae", "#6590c5", "#93b2d9", "#c2d4ea", "#e8eff8"]
+      }
+    },
+    "typographyMeta": {
+      "title-l": { "displayName": "Title L", "purpose": "Largest heading: hero h1, statements and headings inside black panels. Never exceeded." },
+      "title": { "displayName": "Title", "purpose": "Section headings. May take faint ink when it only names the content beneath it." },
+      "title-s": { "displayName": "Title S", "purpose": "Card headings, two-digit card numbers, the hero card's lead line." },
+      "numeral": { "displayName": "Numeral", "purpose": "Meeting times on poster tiles. Not a display size for words." },
+      "text-l": { "displayName": "Text L", "purpose": "Lead sentence under a heading or opening a panel." },
+      "text": { "displayName": "Text", "purpose": "Body copy at 17px, deliberate for older readers." },
+      "text-s": { "displayName": "Text S", "purpose": "Header and footer links (weight 500), schedule and venue lines in cards." },
+      "mono": { "displayName": "Mono", "purpose": "Uppercase labels and controls: pills, arrow links, day names, chips (chips at 0.75rem)." },
+      "mono-text": { "displayName": "Mono Text", "purpose": "Short sentence-case notes in soft ink: who a meeting is for, addresses, value descriptions." }
+    },
+    "shadows": [
+      {
+        "name": "float",
+        "value": "0 18px 40px -18px rgb(19 18 18 / 0.5)",
+        "purpose": "The only shadow: a white card floating over a full-colour photograph (hero next-gathering card)."
+      }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The single easing for every transition and load animation." },
+      { "name": "duration-state", "value": "0.3s", "purpose": "Colour and opacity changes: pill fill, nav dimming, icon hover, disabled row arrows." },
+      { "name": "duration-move", "value": "0.4s", "purpose": "Position changes: arrow slide (0.5rem), floating card lift (4px)." },
+      { "name": "duration-zoom", "value": "0.8s", "purpose": "Card photo zoom to scale 1.04 on hover." },
+      { "name": "hero-settle", "value": "2.2s ease-out, scale 1.06 to 1", "purpose": "Hero photo on load." },
+      { "name": "hero-fade-up", "value": "1s ease-out, opacity 0 and 1rem lower; delays 0.2s and 0.4s", "purpose": "Hero heading and card on load." },
+      { "name": "rise", "value": "scroll-driven, view() entry 0% to 60%, opacity 0.2 to 1, translate 1.25rem to 0", "purpose": "Optional scroll entrance; only where animation-timeline is supported." },
+      { "name": "drift", "value": "70s linear infinite, translate -50%", "purpose": "Gallery loop; pauses on hover; replaced by a scrollable strip under reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "narrow", "value": "30rem" },
+      { "name": "main", "value": "56rem" },
+      { "name": "max", "value": "90rem" }
+    ],
+    "focus": {
+      "value": "outline: 2px solid var(--blue); outline-offset: 3px",
+      "onDark": "outline-color: var(--on-dark) inside .hero and .panel"
+    },
+    "photography": {
+      "sectionFilter": "grayscale(1) contrast(1.05)",
+      "colour": "hero and gallery only",
+      "heroScrim": "linear-gradient(to top, rgb(19 18 18 / 0.72), rgb(19 18 18 / 0.08) 55%, rgb(19 18 18 / 0.18))",
+      "panelPhotoOpacity": 0.32,
+      "ratios": { "cardFrame": "3 / 2", "section": "5 / 4", "gallery": "4 / 5", "poster": "1 / 1" }
+    }
+  },
+  "components": [
+    {
+      "name": "Pill Button",
+      "kind": "button",
+      "refersTo": "pill",
+      "description": "The only button shape: outlined pill with a mono label, for a section's main action.",
+      "html": "<a class=\"ds-pill\" href=\"#\">Cómo llegar</a>",
+      "css": ".ds-pill { display: inline-flex; align-items: center; justify-content: center; min-height: 2.875rem; padding: 0.5rem 1.5rem; border: 1px solid var(--ink); border-radius: 999px; background: transparent; color: var(--ink); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; cursor: pointer; transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out); } .ds-pill:hover { background: var(--ink); color: var(--paper); } .ds-pill:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }"
+    },
+    {
+      "name": "Arrow Link",
+      "kind": "button",
+      "refersTo": "go-link",
+      "description": "Secondary action: mono label with a long thin arrow that slides right on hover.",
+      "html": "<a class=\"ds-go\" href=\"#\">Planificá tu visita <svg width=\"56\" height=\"9\" viewBox=\"0 0 56 9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M0 4.5h55M51 0.5l4 4-4 4\" stroke=\"currentColor\"></path></svg></a>",
+      "css": ".ds-go { display: inline-flex; align-items: center; gap: 1rem; padding-block: 0.5rem; color: var(--ink); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; } .ds-go svg { flex: none; transition: translate 0.4s var(--ease-out); } .ds-go:hover svg { translate: 0.5rem 0; } .ds-go:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "header-bar",
+      "description": "White bar: wordmark left, centred links that dim their siblings on hover, compact pill right.",
+      "html": "<div class=\"ds-bar\"><a class=\"ds-mark\" href=\"#\">IBC</a><ul class=\"ds-nav\"><li><a href=\"#\">Visitanos</a></li><li><a href=\"#\">Reuniones</a></li><li><a href=\"#\">Ministerios</a></li><li><a href=\"#\">Prédicas</a></li></ul><a class=\"ds-bar-cta\" href=\"#\">Cómo llegar</a></div>",
+      "css": ".ds-bar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; height: 3.75rem; padding-inline: 1.5rem; background: var(--paper); color: var(--ink); } .ds-mark { justify-self: start; font-family: var(--font-title); font-size: 1.5rem; font-weight: 900; letter-spacing: -0.04em; line-height: 1; color: inherit; text-decoration: none; } .ds-nav { display: flex; gap: 2rem; margin: 0; padding: 0; list-style: none; } .ds-nav a { padding-block: 0.6rem; color: inherit; font-family: var(--font-text); font-size: 0.9375rem; font-weight: 500; text-decoration: none; transition: opacity 0.3s var(--ease-out); } .ds-nav:hover a:not(:hover) { opacity: 0.45; } .ds-nav a:focus-visible, .ds-bar-cta:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; } .ds-bar-cta { justify-self: end; display: inline-flex; align-items: center; min-height: 2.5rem; padding: 0.5rem 1.25rem; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out); } .ds-bar-cta:hover { background: var(--ink); color: var(--paper); }"
+    },
+    {
+      "name": "Numbered Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Paper card in a numbered row: number, 3:2 frame with an action chip, name, schedule lines, address link.",
+      "html": "<div class=\"ds-place\"><p class=\"ds-place-num\">02</p><div class=\"ds-place-frame\"><span class=\"ds-place-poster\"><span class=\"ds-place-day\">Miércoles</span><span class=\"ds-place-time\">20:15</span></span><span class=\"ds-place-tag\">Cómo llegar</span></div><h3 class=\"ds-place-name\">Templo Bautista</h3><p class=\"ds-place-lines\">Reunión de oración</p><a class=\"ds-place-address\" href=\"#\">Paraguay y Congreso, Eldorado, Misiones</a></div>",
+      "css": ".ds-place { display: grid; align-content: start; width: 22rem; max-width: 100%; padding: 1.75rem; background: var(--paper); border-radius: 2px; color: var(--ink); } .ds-place-num, .ds-place-name { margin: 0; font-family: var(--font-title); font-size: var(--title-s); font-weight: 500; line-height: 1.15; letter-spacing: -0.012em; } .ds-place-frame { position: relative; display: block; margin-block: 1.5rem; aspect-ratio: 3 / 2; overflow: hidden; background: var(--ground); } .ds-place-poster { display: grid; align-content: space-between; height: 100%; padding: 0.9rem 1rem 3.5rem; background: var(--ground-deep); } .ds-place-day, .ds-place-tag { font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; } .ds-place-day { font-size: 0.8125rem; } .ds-place-time { font-family: var(--font-title); font-size: 3.5rem; font-weight: 500; line-height: 0.9; letter-spacing: -0.03em; } .ds-place-tag { position: absolute; left: 0.75rem; bottom: 0.75rem; padding: 0.3rem 0.8rem; border-radius: 999px; background: var(--paper); font-size: 0.75rem; } .ds-place-lines { margin: 0.4rem 0 0; font-family: var(--font-text); font-size: var(--text-s); line-height: 1.5; } .ds-place-address { display: block; margin-top: 1.25rem; color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.9375rem; line-height: 1.6; text-decoration: none; } .ds-place-address:hover { color: var(--ink); text-decoration: underline; } .ds-place-address:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }"
+    },
+    {
+      "name": "Gathering Card",
+      "kind": "card",
+      "refersTo": "poster-next",
+      "description": "Schedule card with a square poster (day and time). Shown in its 'next gathering' state: ink poster and an outlined flag.",
+      "html": "<div class=\"ds-g\"><div class=\"ds-g-poster\"><p class=\"ds-g-day\">Viernes</p><p class=\"ds-g-time\">21:00</p><p class=\"ds-g-flag\">Lo próximo</p></div><h3 class=\"ds-g-name\">JIBE</h3><p class=\"ds-g-who\">Jóvenes</p><p class=\"ds-g-where\">Auditorio Bautista<br>La Rioja 1402, Km 9</p><a class=\"ds-g-pill\" href=\"#\">Cómo llegar</a></div>",
+      "css": ".ds-g { display: grid; align-content: start; justify-items: start; width: 19.5rem; max-width: 100%; padding-bottom: 1.75rem; background: var(--paper); border-radius: 2px; color: var(--ink); } .ds-g > :not(.ds-g-poster) { margin-inline: 1.5rem; } .ds-g-poster { position: relative; display: grid; align-content: space-between; width: 100%; aspect-ratio: 1; margin-bottom: 1.5rem; padding: 1.5rem; background: var(--ink); color: var(--on-dark); } .ds-g-poster p { margin: 0; } .ds-g-day, .ds-g-flag { font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; } .ds-g-day { font-size: 0.8125rem; } .ds-g-time { font-family: var(--font-title); font-size: 5.5rem; font-weight: 500; line-height: 0.9; letter-spacing: -0.03em; } .ds-g-flag { position: absolute; top: 1.35rem; right: 1.5rem; padding: 0.15rem 0.7rem; border: 1px solid currentColor; border-radius: 999px; font-size: 0.75rem; } .ds-g-name { margin-block: 0; font-family: var(--font-title); font-size: var(--title-s); font-weight: 500; line-height: 1.15; letter-spacing: -0.012em; } .ds-g-who { margin-block: 0; color: var(--ink-soft); font-family: var(--font-mono); font-size: 0.9375rem; line-height: 1.6; } .ds-g-where { margin-block: 1rem 1.5rem; color: var(--ink-soft); font-family: var(--font-text); font-size: var(--text-s); line-height: 1.45; } .ds-g-pill { display: inline-flex; align-items: center; min-height: 2.875rem; padding: 0.5rem 1.5rem; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out); } .ds-g-pill:hover { background: var(--ink); color: var(--paper); } .ds-g-pill:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ministry Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Compact paper card stacked over a photograph: name, one soft sentence, optional mono schedule line.",
+      "html": "<div class=\"ds-item\"><h3>Adolescentes</h3><p class=\"ds-item-line\">Amigos, preguntas y fe, cada sábado.</p><p class=\"ds-item-when\">Sábados 18:00</p></div>",
+      "css": ".ds-item { display: grid; gap: 0.35rem; max-width: 26rem; padding: 1.5rem 1.75rem; background: var(--paper); border-radius: 2px; color: var(--ink); } .ds-item h3 { margin: 0; font-family: var(--font-title); font-size: var(--title-s); font-weight: 500; line-height: 1.15; letter-spacing: -0.012em; } .ds-item p { margin: 0; } .ds-item-line { color: var(--ink-soft); font-family: var(--font-text); font-size: var(--text); line-height: 1.5; } .ds-item-when { margin-top: 0.5rem; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }"
+    },
+    {
+      "name": "Black Inset Panel",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Ink rectangle with square corners, set inside the wrapper: heading left, lead, soft copy and an arrow link right.",
+      "html": "<div class=\"ds-panel\"><h2>Fiesta de la Luz</h2><div class=\"ds-panel-text\"><p class=\"ds-panel-lead\">Cada octubre, Octubrillante llena una tarde entera de juegos, música y alegría para los chicos y sus familias.</p><p class=\"ds-panel-more\">En 2025 la fiesta cumplió diez años.</p><a class=\"ds-panel-go\" href=\"#\">Mirá cómo se vivió <svg width=\"56\" height=\"9\" viewBox=\"0 0 56 9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M0 4.5h55M51 0.5l4 4-4 4\" stroke=\"currentColor\"></path></svg></a></div></div>",
+      "css": ".ds-panel { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 6rem); align-items: end; padding: clamp(2.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5.5rem); background: var(--ink); color: var(--on-dark); } .ds-panel h2 { margin: 0; font-family: var(--font-title); font-size: var(--title-l); font-weight: 500; line-height: 1.1; letter-spacing: -0.012em; } .ds-panel-text { display: grid; gap: 1.25rem; justify-items: start; } .ds-panel-text p { margin: 0; font-family: var(--font-text); } .ds-panel-lead { font-size: var(--text-l); line-height: 1.4; } .ds-panel-more { color: var(--on-dark-soft); font-size: var(--text); line-height: 1.5; } .ds-panel-go { display: inline-flex; align-items: center; gap: 1rem; padding-block: 0.5rem; color: inherit; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; } .ds-panel-go svg { flex: none; transition: translate 0.4s var(--ease-out); } .ds-panel-go:hover svg { translate: 0.5rem 0; } .ds-panel-go:focus-visible { outline: 2px solid var(--on-dark); outline-offset: 3px; }"
+    },
+    {
+      "name": "Floating Next-Gathering Card",
+      "kind": "card",
+      "refersTo": "card-float",
+      "description": "The one shadowed, softer-cornered card: sits over the hero's colour photo and names the next gathering.",
+      "html": "<a class=\"ds-next\" href=\"#\"><p class=\"ds-next-title\">Lo próximo: JIBE</p><p class=\"ds-next-text\">Hoy, 21:00 h<br>Auditorio Bautista, La Rioja 1402, Km 9</p><span class=\"ds-next-go\">Cómo llegar <svg width=\"56\" height=\"9\" viewBox=\"0 0 56 9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M0 4.5h55M51 0.5l4 4-4 4\" stroke=\"currentColor\"></path></svg></span></a>",
+      "css": ".ds-next { display: grid; gap: 0.6rem; width: 23rem; max-width: 100%; padding: 1.5rem 1.75rem 1.25rem; background: var(--paper); border-radius: 14px; color: var(--ink); text-decoration: none; box-shadow: 0 18px 40px -18px rgb(19 18 18 / 0.5); transition: translate 0.4s var(--ease-out); } .ds-next:hover { translate: 0 -4px; } .ds-next:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; } .ds-next p { margin: 0; } .ds-next-title { font-family: var(--font-title); font-size: var(--title-s); font-weight: 500; line-height: 1.15; letter-spacing: -0.012em; } .ds-next-text { color: var(--ink-soft); font-family: var(--font-text); font-size: var(--text); line-height: 1.4; } .ds-next-go { display: inline-flex; align-items: center; gap: 1rem; padding-block: 0.5rem; font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; } .ds-next-go svg { flex: none; transition: translate 0.4s var(--ease-out); } .ds-next:hover .ds-next-go svg { translate: 0.5rem 0; }"
+    },
+    {
+      "name": "Row Navigation",
+      "kind": "custom",
+      "refersTo": "go-link",
+      "description": "Borderless arrow buttons under a scrolling card row; the one at the end of travel is disabled at 30% opacity.",
+      "html": "<div class=\"ds-rownav\"><button type=\"button\" aria-label=\"Anterior\" disabled><svg width=\"22\" height=\"9\" viewBox=\"0 0 22 9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M22 4.5H1M5 .5l-4 4 4 4\" stroke=\"currentColor\"></path></svg></button><button type=\"button\" aria-label=\"Siguiente\"><svg width=\"22\" height=\"9\" viewBox=\"0 0 22 9\" fill=\"none\" aria-hidden=\"true\"><path d=\"M0 4.5h21M17 .5l4 4-4 4\" stroke=\"currentColor\"></path></svg></button></div>",
+      "css": ".ds-rownav { display: flex; gap: 0.25rem; color: var(--ink); } .ds-rownav button { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 0; background: none; color: inherit; cursor: pointer; transition: opacity 0.3s var(--ease-out); } .ds-rownav button[disabled] { opacity: 0.3; cursor: default; } .ds-rownav button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Front Door",
+    "overview": "The site is calm on purpose. A warm gray ground, near-black ink and white paper carry everything; headings are medium weight and modest in size; labels are small monospaced capitals; the only filled surfaces are white cards and black panels. Restraint is the look. Warmth comes from the photographs of the real congregation and from the Spanish copy in voseo (\"Hay un lugar para vos\"), never from colour or from loud type.\n\nThe owner pinned this direction after rejecting a first version built on giant condensed capitals over blue and gold fields, which read as generic. That rejection is the system's main guardrail: nothing here should shout. The structure follows the layout language of a named reference (white header bar, full-bleed photo hero, numbered card rows, black inset panels, drifting gallery, white footer) with IBC's own content; none of the reference's code, images or copy is used.\n\nThe congregation includes many older adults, so body text is 17px, tap targets are at least 44px, contrast is strong, and no content depends on motion to be read.",
+    "keyCharacteristics": [
+      "Three neutrals do the work: warm gray ground, near-black ink, white paper.",
+      "Headings are quiet: medium weight (500), never above 3rem, sentence case.",
+      "Uppercase exists only in the monospaced label face.",
+      "Depth is tonal (paper on ground, ink on ground). One shadow exists in the whole system.",
+      "Corners are almost square (2px) on cards and square on photos and panels; full pills on controls.",
+      "Section photos are black and white; the hero and the gallery are in colour.",
+      "Large numerals are reserved for meeting times."
+    ],
+    "rules": [
+      { "name": "The No Colour Field Rule", "body": "The only filled surfaces are paper, ground, deep ground and ink. Blue, gold or any other hue never fills a section, a card, a button or a heading.", "section": "colors" },
+      { "name": "The Focus-Only Blue Rule", "body": "Blue appears as a 2px outline at 3px offset on :focus-visible. Inside the hero and inside any black panel the ring switches to the on-dark colour, because blue is too dark to see there. A new dark surface must opt into the same switch.", "section": "colors" },
+      { "name": "The Faint-Is-Large Rule", "body": "Faint ink is about 3.8:1 on the ground. It is allowed only on headings at the title size or larger. Body copy and labels use ink or soft ink.", "section": "colors" },
+      { "name": "The Quiet Heading Rule", "body": "Headings are weight 500, sentence case, and never larger than Title L (3rem). No condensed faces, no heavy weights, no all-caps headings.", "section": "typography" },
+      { "name": "The Mono-Only Caps Rule", "body": "Uppercase and positive letter-spacing belong to the Mono role alone. Titles and body copy are never uppercased or tracked out.", "section": "typography" },
+      { "name": "The Numerals-Are-Times Rule", "body": "The large numeral size is for meeting times on poster tiles. It is not a display size for words.", "section": "typography" },
+      { "name": "The One Shadow Rule", "body": "A shadow is allowed only on a white card floating over a full-colour photograph. Cards on the ground, panels, the header and buttons are flat.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build every new page from the same three neutrals: ground (#e8e6e3) for the page, paper for cards, header and footer, ink for text and panels.",
+      "Do keep body text at 1.0625rem (17px) and tap targets at 2.75rem or more.",
+      "Do set headings in Inter Tight at weight 500, sentence case, at Title S, Title or Title L.",
+      "Do use the Mono role for labels, buttons, arrow links and short notes, and only there use uppercase.",
+      "Do use the pill for a section's main action and the arrow link for secondary actions.",
+      "Do show schedules as poster tiles: day in Mono, time in the Numeral size.",
+      "Do treat section photos with .bw, and keep colour for a page's hero photo and the gallery.",
+      "Do put an ink scrim or reduced opacity behind any text set over a photo.",
+      "Do switch the focus ring to the on-dark colour on any new dark surface.",
+      "Do wrap every animation in prefers-reduced-motion: no-preference and make sure the content reads without it.",
+      "Do reuse --ease-out with 0.3s for colour and opacity, 0.4s for movement.",
+      "Do take content from src/data/site.ts and publish only confirmed facts."
+    ],
+    "donts": [
+      "Don't bring back the rejected look: giant condensed capitals over blue or gold fields.",
+      "Don't set any heading above 3rem, in a condensed face, in a heavy weight, or in capitals.",
+      "Don't fill a section, card, button or heading with blue, gold or any other hue. Blue is the focus ring only.",
+      "Don't reuse the yellow Fiesta dot elsewhere; it is pending the owner's decision.",
+      "Don't add shadows to cards on the ground, to panels, to the header or to buttons. The single shadow belongs to a white card floating over a colour photo.",
+      "Don't round photos or panels, and don't give ground-level cards more than the 2px radius.",
+      "Don't add a filled or coloured button style; the outlined pill is the only button.",
+      "Don't use faint ink for body copy or labels.",
+      "Don't use the Numeral size for words, counts or decoration.",
+      "Don't use stock imagery, and don't use colour photos inside sections.",
+      "Don't use text glyphs or emoji as icons; icons and arrows are inline SVG.",
+      "Don't copy the reference site's code, images, video, logo or copy."
+    ]
+  }
+}

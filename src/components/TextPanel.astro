@@ -1,0 +1,63 @@
+---
+interface Props {
+	title: string;
+	id?: string;
+}
+
+const { title, id } = Astro.props;
+---
+
+<section class="text-panel wrap" id={id}>
+	<div class="panel">
+		<h2 class="title-l">{title}</h2>
+		<div class="text">
+			<slot />
+		</div>
+	</div>
+</section>
+
+<style>
+	.text-panel {
+		padding-inline: var(--inset);
+	}
+
+	.panel {
+		display: grid;
+		grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+		gap: clamp(2rem, 6vw, 6rem);
+		align-items: end;
+		padding: clamp(2.5rem, 7vw, 6rem) clamp(1.5rem, 6vw, 5.5rem);
+		background: var(--ink);
+		color: var(--on-dark);
+	}
+
+	h2 {
+		max-width: 14ch;
+	}
+
+	.text {
+		display: grid;
+		gap: 0.6rem;
+		justify-items: start;
+	}
+
+	.text :global(.lead) {
+		margin-bottom: 0.75rem;
+		font-size: var(--text-l);
+		line-height: 1.4;
+	}
+
+	.text :global(.quiet) {
+		color: var(--on-dark-soft);
+	}
+
+	.text :global(.go) {
+		margin-top: 0.5rem;
+	}
+
+	@media (max-width: 56rem) {
+		.panel {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

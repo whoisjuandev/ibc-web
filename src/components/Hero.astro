@@ -1,0 +1,233 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/photos/congregacion.jpg';
+import Arrow from './Arrow.astro';
+import { gatherings, venues, days, site } from '../data/site';
+
+const main = gatherings[0];
+const venue = venues[main.venue];
+---
+
+<section class="hero">
+	<Image
+		class="photo"
+		src={photo}
+		alt="La congregación de pie, de espaldas, mirando hacia el escenario durante una reunión en el Auditorio Bautista"
+		widths={[640, 960, 1440, 2048]}
+		sizes="(max-aspect-ratio: 1/1) 180vh, 100vw"
+		loading="eager"
+		fetchpriority="high"
+	/>
+
+	<div class="rail rail-left">
+		<a href={site.social.youtube} target="_blank" rel="noopener" aria-label="YouTube">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+				<path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3L10 15Z"></path>
+			</svg>
+		</a>
+		<a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+				<rect x="3.5" y="3.5" width="17" height="17" rx="4.5"></rect>
+				<circle cx="12" cy="12" r="3.8"></circle>
+				<circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle>
+			</svg>
+		</a>
+		<a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+			<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+				<path d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.500-1.5H16.600V4.300C16.300 4.200 15.400 4.100 14.300 4.100c-2.300 0-3.800 1.400-3.800 3.900v2.400H8v3h2.500V21h3Z"></path>
+			</svg>
+		</a>
+		<span class="rule" aria-hidden="true"></span>
+		<span class="mono vertical">Seguinos</span>
+	</div>
+
+	<div class="wrap foot">
+		<div class="lead">
+			<h1 class="title-l">Hay un lugar para vos</h1>
+			<a class="go" href="/visitanos/">Planificá tu visita <Arrow /></a>
+		</div>
+
+		<div class="side">
+			<a class="rail rail-right" href="#visita">
+				<span class="mono vertical">Descubrí</span>
+				<span class="rule" aria-hidden="true"></span>
+				<svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+					<path d="M7 13 1 3h12L7 13Z"></path>
+				</svg>
+			</a>
+
+			<a class="next card" href={venue.mapUrl} target="_blank" rel="noopener" data-next>
+			<p class="title-s">
+				<span data-next-flag>Lo próximo</span>: <span data-next-name>{main.name}</span>
+			</p>
+			<p class="next-text">
+				<span data-next-when>{days[main.day]}, {main.time} h</span><br />
+				<span data-next-where>{venue.name}, {venue.address}</span>
+			</p>
+			<span class="go">Cómo llegar <Arrow /></span>
+			</a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		display: grid;
+		align-items: end;
+		min-height: max(100svh, 36rem);
+		padding-top: var(--header);
+		color: var(--on-dark);
+		isolation: isolate;
+		overflow: hidden;
+	}
+
+	.photo {
+		position: absolute;
+		inset: var(--header) 0 0;
+		z-index: -2;
+		width: 100%;
+		height: calc(100% - var(--header));
+		object-fit: cover;
+		object-position: 50% 40%;
+	}
+
+	.hero::after {
+		content: '';
+		position: absolute;
+		inset: var(--header) 0 0;
+		z-index: -1;
+		background: linear-gradient(to top, rgb(19 18 18 / 0.72), rgb(19 18 18 / 0.08) 55%, rgb(19 18 18 / 0.18));
+	}
+
+	@media (min-width: 56.01rem) {
+		.hero::after {
+			background:
+				linear-gradient(to top, rgb(19 18 18 / 0.72), rgb(19 18 18 / 0.08) 55%, rgb(19 18 18 / 0.18)),
+				linear-gradient(to right, rgb(19 18 18 / 0.45), transparent 14%, transparent 86%, rgb(19 18 18 / 0.45));
+		}
+	}
+
+	.rail {
+		position: absolute;
+		top: calc(var(--header) + 12%);
+		display: grid;
+		justify-items: center;
+		gap: 1.25rem;
+		text-decoration: none;
+	}
+
+	.rail-left {
+		left: var(--gutter);
+	}
+
+	.rail-right {
+		position: static;
+		margin-right: 1.25rem;
+	}
+
+	.side {
+		display: grid;
+		justify-items: end;
+		gap: 1.5rem;
+		width: min(100%, 23rem);
+	}
+
+	.rail a {
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		margin-block: -0.5rem;
+		transition: opacity 0.3s var(--ease-out);
+	}
+
+	.rail a:hover {
+		opacity: 0.6;
+	}
+
+	.rule {
+		width: 1px;
+		height: 4.5rem;
+		background: currentColor;
+	}
+
+	.vertical {
+		writing-mode: vertical-rl;
+		rotate: 180deg;
+	}
+
+	.foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: end;
+		justify-content: space-between;
+		gap: 2rem;
+		padding-block: 3rem clamp(1.5rem, 4vh, 3rem);
+	}
+
+	.lead {
+		display: grid;
+		gap: 0.75rem;
+		padding-left: var(--inset);
+	}
+
+	.next {
+		display: grid;
+		gap: 0.6rem;
+		width: 100%;
+		padding: 1.5rem 1.75rem 1.25rem;
+		border-radius: 14px;
+		color: var(--ink);
+		text-decoration: none;
+		box-shadow: 0 18px 40px -18px rgb(19 18 18 / 0.5);
+		transition: translate 0.4s var(--ease-out);
+	}
+
+	.next:hover {
+		translate: 0 -4px;
+	}
+
+	.next-text {
+		color: var(--ink-soft);
+		line-height: 1.4;
+	}
+
+	@media (max-width: 56rem) {
+		.rail {
+			display: none;
+		}
+
+		.lead {
+			padding-left: 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.photo {
+			animation: settle 2.2s var(--ease-out) both;
+		}
+
+		.lead,
+		.next {
+			animation: fade-up 1s var(--ease-out) 0.2s both;
+		}
+
+		.next {
+			animation-delay: 0.4s;
+		}
+	}
+
+	@keyframes settle {
+		from {
+			scale: 1.06;
+		}
+	}
+
+	@keyframes fade-up {
+		from {
+			opacity: 0;
+			translate: 0 1rem;
+		}
+	}
+</style>

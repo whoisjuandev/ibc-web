@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Visit from '../components/Visit.astro';
+import PrayerPanel from '../components/PrayerPanel.astro';
+import FirstVisit from '../components/FirstVisit.astro';
+import Week from '../components/Week.astro';
+import Contact from '../components/Contact.astro';
+import reunion from '../assets/photos/reunion.jpg';
+---
+
+<Base
+	title="Visitanos · Iglesia Bautista del Centro"
+	description="Días, horarios y cómo llegar a la Iglesia Bautista del Centro en Eldorado, Misiones. Reunión General los domingos a las 19:00 en el Auditorio Bautista."
+>
+	<PageHero
+		title="Tenemos muchas ganas de conocerte"
+		photo={reunion}
+		alt="La banda tocando en el escenario del Auditorio Bautista, con la congregación de pie"
+		focus="50% 45%"
+	/>
+	<Visit id="como-llegar" heading="Días y lugares" action={null} />
+	<PrayerPanel />
+	<FirstVisit />
+	<Week />
+	<Contact />
+</Base>

@@ -1,0 +1,81 @@
+---
+import { values } from '../data/site';
+---
+
+<section class="values section">
+	<div class="wrap inset grid">
+		<div class="intro">
+			<h2 class="title">Lo que nos mueve</h2>
+			<p class="soft">No es solo lo que hacemos: es lo que somos como iglesia.</p>
+			<p class="mono draft">Borrador · pendiente de revisión de la iglesia</p>
+		</div>
+
+		<ol class="list">
+			{
+				values.map((v, i) => (
+					<li>
+						<p class="num">{String(i + 1).padStart(2, '0')}</p>
+						<h3 class="title-s">{v.name}</h3>
+						<p class="mono-text">{v.text}</p>
+					</li>
+				))
+			}
+		</ol>
+	</div>
+</section>
+
+<style>
+	.grid {
+		display: grid;
+		grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+		gap: clamp(2rem, 5vw, 5rem);
+	}
+
+	.intro {
+		display: grid;
+		gap: 1rem;
+		align-content: start;
+	}
+
+	.draft {
+		justify-self: start;
+		padding: 0.2rem 0.7rem;
+		border: 1px dashed var(--ink-faint);
+		border-radius: 999px;
+		color: var(--ink-soft);
+		font-size: 0.75rem;
+	}
+
+	.list {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 3vw, 3rem);
+	}
+
+	.num {
+		font-family: var(--font-title);
+		font-size: var(--title-s);
+		font-weight: 500;
+		line-height: 1.15;
+	}
+
+	.mono-text {
+		margin-top: 0.9rem;
+	}
+
+	@media (max-width: 56rem) {
+		.grid {
+			grid-template-columns: 1fr;
+		}
+
+		.list {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 30rem) {
+		.list {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

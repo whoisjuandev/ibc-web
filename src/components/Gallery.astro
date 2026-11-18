@@ -1,0 +1,105 @@
+---
+import { Image } from 'astro:assets';
+import guitarrista from '../assets/photos/guitarrista.jpg';
+import manos from '../assets/photos/manos.jpg';
+import cantante from '../assets/photos/cantante.jpg';
+import baterista from '../assets/photos/baterista.jpg';
+import joven from '../assets/photos/joven.jpg';
+import senal from '../assets/photos/senal.jpg';
+
+const photos = [
+	{ src: guitarrista, alt: 'Un guitarrista cantando en el escenario', size: 'm' },
+	{ src: manos, alt: 'Un hombre con los brazos en alto durante la alabanza', size: 'l' },
+	{ src: cantante, alt: 'Una chica cantando con los ojos cerrados', size: 's' },
+	{ src: baterista, alt: 'Un baterista tocando durante la reunión', size: 'm' },
+	{ src: joven, alt: 'Un joven cantando con las manos abiertas', size: 's' },
+	{ src: senal, alt: 'Un chico señalando hacia arriba, visto de espaldas', size: 'l' },
+];
+---
+
+<section class="gallery section" aria-label="Fotos de nuestras reuniones">
+	<div class="track">
+		{
+			[0, 1].map((copy) => (
+				<ul class="set" aria-hidden={copy === 1 ? 'true' : undefined}>
+					{photos.map((p) => (
+						<li class={`shot shot-${p.size}`}>
+							<Image
+								src={p.src}
+								alt={copy === 1 ? '' : p.alt}
+								widths={[300, 500, 700]}
+								sizes="(max-width: 40rem) 55vw, 20rem"
+							/>
+						</li>
+					))}
+				</ul>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.gallery {
+		overflow: hidden;
+	}
+
+	.track {
+		display: flex;
+		width: max-content;
+	}
+
+	.set {
+		display: flex;
+		align-items: center;
+		gap: clamp(1.25rem, 3vw, 3rem);
+		padding-right: clamp(1.25rem, 3vw, 3rem);
+	}
+
+	.shot {
+		flex: none;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background: var(--ground-deep);
+	}
+
+	.shot :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 15%;
+	}
+
+	.shot-s {
+		width: clamp(9rem, 14vw, 13rem);
+	}
+
+	.shot-m {
+		width: clamp(12rem, 19vw, 18rem);
+	}
+
+	.shot-l {
+		width: clamp(15rem, 24vw, 23rem);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.track {
+			animation: drift 70s linear infinite;
+		}
+
+		.gallery:hover .track {
+			animation-play-state: paused;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gallery {
+			overflow-x: auto;
+		}
+	}
+
+	@keyframes drift {
+		to {
+			translate: -50% 0;
+		}
+	}
+</style>

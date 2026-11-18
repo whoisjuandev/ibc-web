@@ -1,0 +1,54 @@
+---
+import { Image } from 'astro:assets';
+import adoracion from '../assets/photos/adoracion.jpg';
+---
+
+<section class="mission wrap">
+	<div class="panel inset-box">
+		<Image
+			class="bw"
+			src={adoracion}
+			alt=""
+			widths={[600, 1000, 1600]}
+			sizes="(max-width: 90rem) 100vw, 78rem"
+		/>
+		<p class="title-l">
+			Buscamos algo simple:<br />
+			conocer, amar y seguir a&nbsp;Jesús.
+		</p>
+	</div>
+</section>
+
+<style>
+	.mission {
+		padding-inline: var(--inset);
+	}
+
+	.panel {
+		position: relative;
+		display: grid;
+		place-items: center;
+		min-height: clamp(20rem, 42vw, 32rem);
+		padding: 3rem clamp(1.5rem, 6vw, 6rem);
+		overflow: hidden;
+		background: var(--ink);
+		color: var(--on-dark);
+		text-align: center;
+		isolation: isolate;
+	}
+
+	.panel :global(img) {
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 18%;
+		opacity: 0.32;
+	}
+
+	p {
+		max-width: 26ch;
+	}
+</style>

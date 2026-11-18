@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # impeccable runtime cache
 .impeccable/hook.cache.json
+
+# local agent skill registry
+.atl/

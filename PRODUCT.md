@@ -10,6 +10,8 @@ web
 
 Astro (chosen by the owner). Static site, no CMS yet. Content lives in `src/data/site.ts`.
 
+Domain: `iglesiabautistadelcentro.com.ar` (confirmed by the owner 2026-11-18), set as `site` in `astro.config.mjs`.
+
 ## Users
 
 - Primary (inferred from the owner's brief, not formally confirmed): people in Eldorado, Misiones who do not attend IBC yet and want to know who the church is, when and where it meets, and what exists for their family. Mostly on a phone, often arriving from Instagram, Facebook, or a personal invitation.
@@ -28,16 +30,17 @@ A real, local, intergenerational church family: "conocer, amar y seguir a Jesús
 
 - Weekly gatherings: Reunión General, Sunday 19:00; JIBE (youth), Friday 21:00; Adolescentes, Saturday 18:00; Pre-adolescentes, Saturday 16:00, all at Auditorio Bautista, La Rioja 1402, Km 9. Prayer meeting, Wednesday 20:15, at Templo Bautista, Paraguay y Congreso.
 - Two venues that must never be confused.
-- Channels: Facebook (`idelcentroeldorado`), Instagram (`ibc.eldorado`), YouTube (sermons), YouVersion.
+- Channels: Facebook (`idelcentroeldorado`), Instagram (`ibc.eldorado`), YouTube (`@ibc.eldorado`, sermons; confirmed by the owner 2026-11-18), YouVersion. Fiesta de la Luz has its own Instagram (`fiestadelaluz.ibc`, confirmed by the owner 2026-11-18).
 
 ## Capabilities and Constraints
 
 - Confirmed from the church's Instagram highlights (2026-11-13): "Encuentros 4G" at the Auditorio Bautista: Ministerio de Niños, up to 9 years, Sundays 19:00; Pre-adolescentes, 10 to 12, Saturdays 16:00; Adolescentes, 13 to 17, Saturdays 18:00; Jóvenes, 18 and over, Fridays 21:00. "Grupos de vida" exist for women, men, teens, youth and mixed groups, on several weekdays across Eldorado.
-- Decided by the owner (2026-11-13): Fiesta de la Luz has its own visual style and will get its own website soon. This site carries no Fiesta de la Luz page; it keeps only the home panel, which links to Instagram. Do not build a Fiesta page here unless the owner asks.
+- Decided by the owner (2026-11-13): Fiesta de la Luz has its own visual style and will get its own website soon. This site carries no Fiesta de la Luz page; it keeps only the home panel, which links to the event's own Instagram. Do not build a Fiesta page here unless the owner asks.
 - Privacy: the Grupos de vida highlight lists leaders' names, home addresses and personal phone numbers. None of that is published on the site; the page sends people to the church's contact channels instead. Publishing the list needs the owner's explicit decision.
 - Ministries known: Alabanza, Multimedia, JIBE, Adolescentes, Pre-adolescentes, Oración, Niños, Parejas, Mujeres, Grupos de vida (also called "células"; one name must be chosen), Instituto Bautista del Centro (the church's own school, confirmed by the owner 2026-11-13: nivel inicial, primario and secundario; website https://institutobautistadelcentro.com/, which does not answer on `www`; linked from a home panel and the footer; its white logo and two photos were downloaded from that website with the owner's permission into `src/assets/logos/instituto-white.svg` and `src/assets/photos/instituto-*.webp`).
-- Undecided or missing: official mission, vision, and statement of faith; founding year; pastoral team roles and bios; YouTube URL; institutional email and WhatsApp; giving methods; official typefaces.
+- Undecided or missing: official mission, vision, and statement of faith; founding year; pastoral team roles and bios; institutional email; giving methods; official typefaces.
 - Decided by the owner (2026-11-13): the Templo Bautista card carries no photo; it keeps the typographic day-and-time tile. Never place a photo taken at the Auditorio on Templo content.
+- The church has no WhatsApp (owner, 2026-11-18). Never add a WhatsApp number or link; contact goes through the phone, Instagram and Facebook.
 - Content is edited in code for now.
 
 ## Brand Commitments

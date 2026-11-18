@@ -11,7 +11,7 @@ Scope: the public home page. Mode: Persuade. Build path: code-led (no image gene
 
 Audience and job: someone in Eldorado who does not attend yet, on a phone, deciding whether to come. Action: plan a visit (when, where, how to get there). Proof: real photos of the congregation and the real weekly schedule.
 
-Constraints: only confirmed facts; two venues kept distinct; logo vector, YouTube URL, and WhatsApp still pending. The owner rejected the first direction as generic and pinned the reference.
+Constraints: only confirmed facts; two venues kept distinct; the church has no WhatsApp, so none is shown. The owner rejected the first direction as generic and pinned the reference.
 
 ## Direction contract
 

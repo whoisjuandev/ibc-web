@@ -15,4 +15,4 @@ Structure, after the reference's visit page: page hero, numbered "Días y lugare
 
 Constraints: only confirmed facts. No FAQ, because service length, children's care and parking are not confirmed. The Templo Bautista carries no photo by the owner's decision.
 
-Unresolved: real WhatsApp number and YouTube channel URL.
+The church has no WhatsApp; the closing contact offers the phone, Instagram and Facebook.

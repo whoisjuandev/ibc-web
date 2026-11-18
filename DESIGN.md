@@ -181,7 +181,6 @@ A neutral, warm-leaning grayscale. No hue is used as a surface.
 
 ### Provisional, not part of the system
 - The Fiesta de la Luz logo (`src/assets/logos/fiesta-de-la-luz.svg`) carries the event's own yellow (#fdbd10). That yellow exists only inside the logo file; there is no yellow token, and no other element may use it.
-- `--line-on-dark` is declared but unused.
 
 ### Named Rules
 **The No Colour Field Rule.** The only filled surfaces are paper, ground, deep ground and ink. Blue, gold or any other hue never fills a section, a card, a button or a heading.
@@ -231,7 +230,7 @@ All titles use `text-wrap: balance`.
 - **Horizontal rows:** card rows scroll sideways with mandatory snap and a hidden scrollbar. The row's side padding matches the wrapper edge, so the first card aligns with the text above and the last cards bleed off the viewport. Gap 1rem to 1.75rem. Card widths are fixed per row: `min(78vw, 22rem)` for visit cards, `min(76vw, 19.5rem)` for gathering cards. A row with more cards than fit gets a pair of arrow buttons below it; a row that fits is centred.
 - **Split sections:** two columns in a 5:6 ratio (text and photo, or heading and text) with a gap of 2rem to 6rem; a 3:9 split for an intro beside a three-column numbered list.
 - **Overlap:** on wide screens the ministries section sets a sticky black-and-white photo across columns 1 to 8 of a 12-column grid and lets a stack of white cards (columns 8 to 12) scroll over its right edge. On phones the cards pull up 2.5rem over the photo's bottom edge.
-- **Breakpoints:** one main break at 56rem. Below it: the header links and CTA collapse into a menu, hero rails disappear, split sections stack with the photo first, the hero card takes the full width. A second break at 30rem takes the numbered list from two columns to one.
+- **Breakpoints:** one main break at 56rem, always written as `(max-width: 55.99rem)` below and `(min-width: 56rem)` from it, so no width lands in both. Range syntax (`width < 56rem`) is avoided: Safari before 16.4 ignores it and the build does not rewrite it. Below it: the header links and CTA collapse into a menu, hero rails disappear, split sections stack with the photo first, the hero card takes the full width. A second break at 30rem takes the numbered list from two columns to one.
 - **Stacks:** text groups use grid gaps of 1rem to 1.25rem; card interiors use 1.5rem to 1.75rem padding.
 - **Tap targets:** icon buttons and menu controls are 2.75rem square; pills are at least 2.875rem tall.
 
@@ -293,7 +292,7 @@ An ink rectangle with square corners, set inside the wrapper at the inset width,
 - **Footer:** white. A row of Text S links, a row of pills ("Llamanos", "Instagram", "Facebook"), then a hairline and a base line with the stacked logo and Mono Text details.
 
 ### Row navigation
-Two borderless 2.75rem buttons with the short thin arrows, placed under a scrolling row at the text edge. A button at the end of its travel drops to 30% opacity and is disabled.
+Two borderless 2.75rem buttons with the short thin arrows, placed under a scrolling row at the text edge. A button at the end of its travel drops to 30% opacity and is disabled. `RowNav.astro` carries the buttons and their script: placed after a `[data-row]` in the same section, it drives that row.
 
 ### Hero rails (wide screens only)
 Vertical rails at the photo's edges: social icons (22px inline SVG, 2.75rem targets), a 4.5rem hairline and a vertical Mono word ("Seguinos") on the left; a vertical Mono word ("Descubrí"), a hairline and a small triangle on the right, linking to the first section. Hidden below 56rem.
@@ -314,7 +313,7 @@ Vertical rails at the photo's edges: social icons (22px inline SVG, 2.75rem targ
   3. **Black panels open.** A `.panel` widens from `inset(10% 7%)` to full as it travels from 96% to 48% of the viewport (scrubbed); its Title L statement comes up line by line from a mask, 1s, 0.09s apart, once; a photo inside settles from scale 1.14.
   4. **The week lights up.** In a `.week` row the cards arrive in order, then the next gathering's poster turns from deep ground to ink and its flag appears. This is the site's one authored moment: it shows which gathering is next.
 - **Motion rules:** easing is `expo.out` for arrivals (the same curve as `--ease-out`) and none for scrubbed moves. Initial states are set in script, so the page is complete without JavaScript. Section headings do not animate; only panel statements do.
-- **Gallery:** two copies of the photo set drift left in a 70s linear loop and pause on hover.
+- **Gallery:** two copies of the photo set drift left in a 70s linear loop. They pause on hover, and a borderless Mono text button under the strip, at the text edge and 2.75rem tall, pauses and resumes them for keyboard and touch: a hairline pause or play icon before the label "Pausar fotos" or "Reanudar fotos", fading to soft ink on hover. The button appears only when the script runs and is hidden with reduced motion.
 - **Smooth scrolling** for anchor links.
 - **Reduced motion:** the CSS animations are inside `prefers-reduced-motion: no-preference`, and the script reads the same preference through `gsap.matchMedia()`. With reduced motion nothing travels: lists fade in over 0.4s, the next gathering still turns black because that change carries meaning, panels and photos stay still, the gallery becomes a manually scrollable strip and smooth scrolling is off.
 
@@ -322,7 +321,7 @@ Vertical rails at the photo's edges: social icons (22px inline SVG, 2.75rem targ
 
 - **Routes:** the home is `/`; inner pages live at their own path (`/visitanos/`, `/ministerios/`). Header and footer links are root-relative (`/visitanos/`, `/#semana`), so they work from any page.
 - **Page hero (`PageHero.astro`):** full-bleed colour photo below the header, 72svh tall, with one Title L heading at the lower left on the inset edge. No rails and no floating card; those belong to the home hero only.
-- **Section reuse:** the numbered visit cards (`Visit.astro`) take a heading, an id and an optional pill action, so the same cards serve the home and the visit page. The week row (`Week.astro`) is reused as is and also carries the row-arrow script.
+- **Section reuse:** the numbered visit cards (`Visit.astro`) take a heading, an id and an optional pill action, so the same cards serve the home and the visit page. The week row (`Week.astro`) is reused as is; its arrows come from `RowNav.astro`.
 - **Photo-and-logo black panel (`FeaturePanel.astro`):** photo on the left, and on the right a logo standing as the heading, a lead sentence, one quiet line and one arrow link. Used for the two bodies that have their own identity: Fiesta de la Luz (colour photo, its own logo) and the Instituto Bautista del Centro (black-and-white photo, white round logo at 9rem). Each logo appears only in its own panel.
 - **Text-only black panel (`TextPanel.astro`):** Title L statement on the left; a lead sentence, quiet facts and one arrow link on the right; no photo. Use it when no honest photo of the place or group exists. `PrayerPanel.astro` and the "Grupos de vida" panel are built on it.
 - **Week row layout:** from 75rem up, the week is a grid inside the content column with one card per column (`--n` columns), aligned with the section title, with no horizontal scroll and no arrows; the time numeral scales with its poster (`32cqi`). Below 75rem it is the snap-scrolling row with arrows. The whole week shows one card per time slot: a gathering marked `alongside` another (the children's ministry during the Sunday gathering) is named inside that card as "A la misma hora: …" instead of repeating the same day and time. Scrolling rows compute their side padding from `100%`, never `100vw`, so a visible scrollbar cannot push the cards out of line with the title.

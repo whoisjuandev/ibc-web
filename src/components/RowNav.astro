@@ -1,0 +1,35 @@
+---
+// Arrows for a horizontal `[data-row]` in the same section. Place it after the row.
+---
+
+<div class="row-nav" data-row-nav>
+	<button type="button" data-dir="-1" aria-label="Anterior">
+		<svg width="22" height="9" viewBox="0 0 22 9" fill="none" aria-hidden="true">
+			<path d="M22 4.5H1M5 .5l-4 4 4 4" stroke="currentColor"></path>
+		</svg>
+	</button>
+	<button type="button" data-dir="1" aria-label="Siguiente">
+		<svg width="22" height="9" viewBox="0 0 22 9" fill="none" aria-hidden="true">
+			<path d="M0 4.5h21M17 .5l4 4-4 4" stroke="currentColor"></path>
+		</svg>
+	</button>
+</div>
+
+<script>
+	document.querySelectorAll<HTMLElement>('[data-row-nav]').forEach((nav) => {
+		const row = nav.closest('section')?.querySelector<HTMLElement>('[data-row]');
+		if (!row) return;
+		const buttons = [...nav.querySelectorAll<HTMLButtonElement>('button')];
+		const step = () => (row.firstElementChild as HTMLElement).offsetWidth + 24;
+		const sync = () => {
+			buttons[0].disabled = row.scrollLeft < 8;
+			buttons[1].disabled = row.scrollLeft > row.scrollWidth - row.clientWidth - 8;
+		};
+		buttons.forEach((b) =>
+			b.addEventListener('click', () => row.scrollBy({ left: Number(b.dataset.dir) * step(), behavior: 'smooth' })),
+		);
+		row.addEventListener('scroll', sync, { passive: true });
+		window.addEventListener('resize', sync);
+		sync();
+	});
+</script>

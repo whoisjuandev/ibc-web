@@ -2,7 +2,7 @@
 
 Public website of Iglesia Bautista del Centro (IBC), a Baptist church in Eldorado, Misiones, Argentina. It tells a first-time visitor who the church is, when and where it meets, and what there is for each age.
 
-Built with [Astro](https://astro.build) as a static site, with GSAP for scroll motion.
+Built with [Astro](https://astro.build) as a static site, with GSAP for scroll motion. Domain: `iglesiabautistadelcentro.com.ar`.
 
 ## Pages
 
